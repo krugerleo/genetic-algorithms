@@ -7,7 +7,7 @@ import random
 import datetime
 
 geneSet = " abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!."
-target = "paPaGaio"
+target = "QUAL quer PAlVRA"
 
 
 
@@ -36,19 +36,19 @@ def display(guess):
     print("{0}\t{1}\t{2}".format(guess, fitness, str(timeDiff)))
 
 if __name__ == '__main__':
-    random.seed()
-    startTime = datetime.datetime.now()
-    bestParent = generate_parent(len(target))
-    bestFitness = get_fitness(bestParent)
-    display(bestParent)
+    random.seed() # VALOR PRA GERAR ALEATORIO
+    startTime = datetime.datetime.now() 
+    bestParent = generate_parent(len(target)) # PRIMEIRO GERAÇÃO
+    bestFitness = get_fitness(bestParent) # PRIMEIRO FITNESS
+    display(bestParent) # PRINT A GERAÇÃO ATUAL
     while True:
-        child = mutate_parent(bestParent)
-        childFitness = get_fitness(child)
-        if bestFitness >= childFitness:
+        child = mutate_parent(bestParent) # A PARTIR DO MELHOR ATUAL GERA UM FILHO
+        childFitness = get_fitness(child) # PEGA O FITNESS DO FILHO
+        if bestFitness >= childFitness: # SE O FITNESS FILHO É MENOR OU IGUAL AO FITNESS ATUAL VAI PROXIMA INTERAÇÃO
             continue
         display(child)
-        if childFitness >= len(bestParent):
+        if childFitness >= len(bestParent): # SE O FITNESS DO FILHO É IGUAL AO TAMANHO DA PALAVRA, RESULTADO ENCONTRADO!
             break
-        bestFitness = childFitness
+        bestFitness = childFitness # SE NÃO FILHO É ATRIBUIDO AOS VALORES ATUAIS PARA PROXIMA INTERAÇÃO
         bestParent = child
 
